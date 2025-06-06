@@ -3,6 +3,8 @@ import telebot
 from flask import Flask, request
 
 TOKEN = '7334013777:AAEQVcRi6MpiDok7_Tsl9JQSjPWYAxHSH-g'
+OWNER_CHAT_ID = 123456789  # <--1656844563
+
 bot = telebot.TeleBot(TOKEN)
 app = Flask(__name__)
 
@@ -14,16 +16,16 @@ def webhook():
     return ''
 
 @bot.message_handler(func=lambda message: True)
-def echo_all(message):
-    # ساخت متن با نام یا آیدی کاربر و متن پیام
-    user_info = message.from_user.username or message.from_user.first_name or "ناشناس"
-    text_to_send = f"پیام از کاربر {user_info}:\n{message.text}"
-    
-    # ارسال پیام به همان چت (صفحه ربات)
-    bot.send_message(message.chat.id, text_to_send)
-    
-    # پاسخ دادن به کاربر
+def handle_message(message):
+    # ارسال پیام "received" به کاربر
     bot.reply_to(message, "received")
+
+    # ساخت پیام برای ارسال به خودت (صاحب ربات)
+    user_info = message.from_user.username or message.from_user.first_name or "ناشناس"
+    text_for_owner = f"پیام از کاربر {user_info} (id={message.from_user.id}):\n{message.text}"
+
+    # ارسال پیام به چت خودت
+    bot.send_message(OWNER_CHAT_ID, text_for_owner)
 
 if __name__ == '__main__':
     bot.remove_webhook()
