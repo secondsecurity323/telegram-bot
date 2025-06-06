@@ -19,10 +19,8 @@ def echo_all(message):
 
 if __name__ == '__main__':
     bot.remove_webhook()
-    bot.set_webhook(url=f'https://my-telegram-bot_render.onrender.com/{TOKEN}')
+    bot.set_webhook(url=f'https://my-telegram-bot-wi2v.onrender.com/{TOKEN}')
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
-
-
 
 
