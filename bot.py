@@ -3,7 +3,7 @@ import telebot
 from flask import Flask, request
 
 TOKEN = '7334013777:AAEQVcRi6MpiDok7_Tsl9JQSjPWYAxHSH-g'
-OWNER_CHAT_ID = 123456789  # <--1656844563
+OWNER_CHAT_ID = 1656844563
 
 bot = telebot.TeleBot(TOKEN)
 app = Flask(__name__)
